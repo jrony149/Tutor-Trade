@@ -1,0 +1,127 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- main CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/signup.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/knowledge.css' %}">
+
+
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Tutor trade</title>
+    {% endif %}
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">Welcome to Tutor Trade</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              {% if messg %}
+
+              {% else %}
+
+                <a class="nav-item nav-link" href="{% url 'blog-knowledge' %}">Knowledge Board</a>
+              {% endif %}
+
+
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              {% if messg %}
+                <a class="nav-item nav-link" href="{% url 'blog-login' %}">Login</a>
+                <a class="nav-item nav-link" href="{% url 'blog-signup' %}">Signup</a>
+              {% else %}
+                <a class="nav-item nav-link" href="{% url 'blog-logout' %}">Logout</a>
+                <a class="nav-item nav-link" href="{% url 'blog-myProfile' %}">My Profile</a>
+                <a class="nav-item nav-link" href="{% url 'blog-createpost' %}">Make A Post</a>
+
+              {% endif %}
+
+
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+        </div>
+      </div>
+      <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-bottom">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+              <a class="nav-item nav-link" href="{% url 'blog-contact' %}">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main role="main" class="container">
+      <div class="row">
+        <div class="col-md-8">
+    </main>
+    <div>
+
+     <h2>Welcome To Tutor Trade</h2>
+<body><br>
+<div class="containerOne">
+
+<style>
+.containerOne{
+ background: #5f788a;
+ padding: 15px 15px;
+ border: 2px solid #dddddd;
+ border-radius: 3px;
+ margin-bottom: 10px;
+}
+</style>
+        <img src="https://admissions.ucsc.edu/apply/images/22oakes-students.jpg" alt="Norway" style="width:100%;">
+ <div class="text-block">  </body>
+
+
+
+
+
+          {% block content %}{% endblock %}
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-auth.js"></script>
+
+  </body>
+</html>

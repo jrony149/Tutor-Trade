@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+
+                
+
+<html>
+<head>
+    {% load static %}
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- main CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/signup.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/knowledge.css' %}">
+
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Tutor trade</title>
+    {% endif %}
+</head>
+
+
+
+<body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">Welcome to Tutor Trade</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+
+              <a class="nav-item nav-link" href="{% url 'blog-contact' %}">Contact Us</a>
+              
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="{% url 'blog-login' %}">Log in</a>
+              <a class="nav-item nav-link" href="{% url 'blog-signup' %}" style="color:white;">Sign up</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main role="main" class="container">
+      <div class="signup_container">
+        <div><h1>Sign up for Tutor Trade!</h1></div>
+        {% if messg1 %}
+
+          <p class="text-danger">{{ messg1 }}</p>
+
+        {% endif %}  
+
+        {% if messg2 %}
+
+          <p class="text-danger">{{ messg2 }}</p>
+
+
+        {% endif %}  
+        <div class="signup_content">
+          <!-- <form action="/postsignup/" method="post">
+            {% csrf_token %} -->
+          <form action="/postsignup/" method="post">
+            {% csrf_token %}
+            <!-- Name:
+            <input type="text" name ="name"><br><br> -->
+
+            <div class="signup_row" style="margin-top: 20px;">
+                <h4 class="signup_title">
+                  <label for="id">Name</label><p class="text-danger" style="display:inline">*</p>
+                </h4>
+              
+              <div class="signup_input_wrap">
+                <div class="signup_box_row">
+                  <span class="signup_input box_right_space">
+                    <input type="text" name="name" id="signup_name1"  placeholder="First Name" maxlength="40" style="border: none;">
+                  </span>
+                </div>
+                <div class="signup_box_row">
+                  <span class="signup_input">
+                    <input type="text" name="name2" id="signup_name2" placeholder="Last Name" maxlength="40" style="border: none; ">
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Email :
+            <input type="email" name ="email"><br><br> -->
+            <div class="signup_row">
+              <h4 class="signup_title">
+                <label for="id">Email</label><p class="text-danger" style="display:inline">*</p>
+              </h4>
+              <div class="signup_input_id">
+                <span class="signup_input" style="position: relative; display: inline-block;">
+                  <input type="email" name ="email" id="signup_email" class="int" title="ID" maxlength="40" style="border: none; width: 100%;">
+                </span>
+                
+                <span class="error_next_box" id="emailMsg" style="display:none" role="alert">Email is already taken.</span>
+              </div>
+            </div>
+
+            <!-- Password:
+            <input type="password" name ="pass"><br><br> -->
+            <div class="signup_row">
+              <h4 class="signup_title">
+                <label for="id">Password</label><p class="text-danger" style="display:inline">*</p>
+              </h4>
+              <span class="signup_input">
+                <input type="password" name ="pass" id="signup_pw1" maxlength="20" style="border: none; width: 100%;" onchange="isSame()">
+              </span>
+            </div>
+
+            <div class="signup_row">
+              <h4 class="signup_title">
+                <label for="id">Password Confirm</label><p class="text-danger" style="display:inline">*</p>
+              </h4>
+              <span class="signup_input">
+                  <input type="password" name="pass2" id="signup_pw2" maxlength="20" style="border: none; width: 100%;" onchange="isSame()">
+              </span>
+              <span class="error_next_box" id="pwMsg" style="display:none" role="alert">These passwords don’t match.</span>
+            </div>
+
+            <div class="signup_row">
+              <h4 class="signup_title">
+                <label for="id">Contact</label>
+              </h4>
+              <span class="signup_input">
+                <input type="text" id="signup_contact" name="contact" maxlength="20" style="border: none; width: 100%;">
+              </span>
+            </div>
+
+            <div class="signup_row">
+              <h4 class="signup_title">
+                <label for="id">Location</label>
+              </h4>
+              <span class="signup_input">
+                <input type="text" id="signup_contact" name="location" maxlength="20" style="border: none; width: 100%;">
+              </span>
+            </div>
+
+            <div class="signup_row">
+              <h4 class="signup_title">
+                <label for="id">Current Major</label>
+              </h4>
+              <span class="signup_input">
+                <input type="text" id="signup_contact" name="major" maxlength="20" style="border: none; width: 100%;">
+              </span>
+            </div>
+
+            <!-- <input type="submit" value="SignUp"> -->
+            <div class="signup_btn_row">
+              <input type="submit" value="Sign up" id="btnJoin" class="btn_type btn_primary"></input>
+            </div>
+
+          </form>
+        </form>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+  <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-app.js"></script>
+
+  <!-- Add Firebase products that you want to use -->
+  <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-auth.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.10.1/firebase-database.js"></script>
+  
+
+  
+
+</body>
+</html>

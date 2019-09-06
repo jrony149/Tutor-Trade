@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    {% if messg %}
+      <script>
+        alert('{{ messg }}');
+      </script>
+    {% endif %}
+    <script src="https://www.gstatic.com/firebasejs/4.9.0/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyBHHg2e5gRop8tcO2RReu8paiEXJbGomVw",
+        authDomain: "verve-slug-tutor.firebaseapp.com",
+        databaseURL: "https://verve-slug-tutor.firebaseio.com",
+        projectId: "verve-slug-tutor",
+        storageBucket: "verve-slug-tutor.appspot.com",
+        messagingSenderId: "1013220996189"
+      };
+      firebase.initializeApp(config);
+    </script>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- main CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/signup.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/knowledge.css' %}">
+
+
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Tutor trade</title>
+    {% endif %}
+</head>
+
+
+
+<body>
+    <!-- top header -->
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">Welcome to Tutor Trade</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{% url 'blog-knowledge' %}">Knowledge Board</a>
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="{% url 'blog-logout' %}">Logout</a>
+              <a class="nav-item nav-link" href="{% url 'blog-editProfile' %}" style="color:white;">Edit Profile</a>
+              <a class="nav-item nav-link" href="{% url 'blog-post_form' %}">Make A Post</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- bottom header
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-bottom">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto" style="color: white;">
+              Bringing free knowledge to all UCSC students.
+            </div>
+             Navbar Right Side 
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+              <a class="nav-item nav-link" href="{% url 'blog-contact' %}">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>-->
+
+    <main role="main" class="container">
+      <div class="signup_container">
+        <!-- <div class="row" style="height: 50px; margin-bottom: 30px;">
+          <div class="col-md-5"><h1>Tutor Trade!</h1></div>
+          <div class="col-md-7" style="line-height: 50px;">Bringing free knowledge to all UCSC students.</div>
+        </div> -->
+
+        <div><h1>Edit Profile</h1>
+          <a class="text-muted">Please note that changing your "Contact" field to an email address is fine, but will not alter your login email.</a>
+        </div>  
+
+
+        <form action="/postprofile/" method="post">
+        {% csrf_token %}  
+        
+
+          <div class="signup_row" >
+            <h4 class="signup_title">
+              <label for="id">Name</label>
+            </h4>
+            <div class="signup_input_wrap">
+              <div class="signup_box_row">
+                <span class="signup_input box_right_space">
+                  <input type="text" name="name1" id="name"  placeholder="First Name" maxlength="40" style="border: solid 1px gray;">
+                </span>
+              </div>
+              <div class="signup_box_row">
+                <span class="signup_input">
+                  <input type="text" name="name2" id="lastname" placeholder="Last Name" maxlength="40" style="border: solid 1px gray;">
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div class="signup_row">
+            <h4 class="signup_title">
+              <label for="id">Contact</label>
+            </h4>
+            <span class="signup_input">
+              <input type="text" name="contact" id="contact" placeholder="" maxlength="20" style="border: solid 1px gray; width: 100%;">
+            </span>
+          </div>
+
+          <div class="signup_row">
+            <h4 class="signup_title">
+              <label for="id">Location</label>
+            </h4>
+            <span class="signup_input">
+              <input type="text" name="location" id="location" placeholder="" maxlength="20" style="border: solid 1px gray; width: 100%;">
+            </span>
+          </div>
+
+          <div class="signup_row">
+            <h4 class="signup_title">
+              <label for="id">Current Major</label>
+            </h4>
+            <span class="signup_input">
+              <input type="text" name="major" id="major" placeholder="" maxlength="20" style="border: solid 1px gray; width: 100%;">
+            </span>
+          </div>
+
+          <div>
+            <h4 class="signup_title">
+              <label for="id">Hobbies</label>
+            </h4>
+            <span class=signup_title>
+              <textarea rows="5" cols="40" name="hobbies" id="hobbies" style="border: solid 1px gray; width: 100%"></textarea>
+             <!-- <input type="text" name="major" id="major" placeholder="" maxlength="20" style="border: none; width: 100%;">-->
+            </span>
+          </div>
+
+          <div class="signup_btn_row">
+            <input type="submit" value="Update Profile"></input>
+          </div>
+
+        </div>
+      </div>
+    </form>  
+    </main>
+
+    
+
+
+ <!--<script>
+  var tblUsers = document.getElementById('tbl_users_list');
+  var databaseRef = firebase.database().ref('users/');
+  var rowIndex = 1;
+  console.log(sessionStorage.getItem('email'));
+  var userKey = "";
+  /* initial verification of the email */
+  firebase.database().ref('users/').once('value', function(snapshot){
+    var userList = snapshot.val();
+    console.log(userList);
+    var userKeyList = Object.keys(userList);
+    // console.log(userKeyList);
+    for (var i=0; i<userKeyList.length; i++){
+      // console.log(userKeyList[i]);
+      // console.log(userList[userKeyList[i]].details.email);
+      if(sessionStorage.getItem('email') === userList[userKeyList[i]].details.email){
+        userKey = userKeyList[i];
+        console.log("Match", userKeyList[i], userList[userKeyList[i]].details.email);
+        console.log(userList[userKeyList[i]].details);
+        console.log(document.getElementById('email').placeholder);
+        document.getElementById('email').placeholder = userList[userKeyList[i]].details.email;
+        document.getElementById('name').placeholder = userList[userKeyList[i]].details.name;
+        document.getElementById('lastname').placeholder = userList[userKeyList[i]].details.lastname;
+        document.getElementById('contact').placeholder = userList[userKeyList[i]].details.contact;
+        // return userKey;
+      }
+      // console.log(userKey);
+    }
+    });
+  function update_user() {
+    // var email = sessionStorage.setItem('email'); // look into this
+    var name = document.getElementById('name').value;
+    var lastname = document.getElementById('lastname').value;
+    var contact = document.getElementById('contact').value;
+    var email = sessionStorage.getItem('email');
+    var data = {
+      name: name,
+      lastname: lastname,
+      email: email,
+      contact: contact,
+      status: 1,
+    };
+    console.log("userKey", userKey);
+    setTimeout(function(){
+      // console.log("userKey", userKey);
+      firebase.database().ref('users/'+userKey+'/details').update(data);
+      alert('The user is updated successfully!');
+      reload_page();
+    }, 500);
+   // try if here after
+  }
+  function delete_user() {
+     // var user_id = document.getElementById('user_id').value;
+     firebase.database().ref('users/'+userKey).remove();
+     // firebase.database().ref().child('/users/' + user_id).remove();
+     alert('The user is deleted successfully!');
+     reload_page();
+  }
+  function reload_page() {
+    window.location.reload();
+  }
+  </script>-->
+
+   <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+</body>
+

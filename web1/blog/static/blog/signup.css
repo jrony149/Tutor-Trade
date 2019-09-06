@@ -1,0 +1,125 @@
+/* css for the signup page */
+:root {
+  --btn-color: #5f788a;
+  --btn-color2: #4D6270;
+}
+
+.signup_container{
+  margin: 0 auto;
+  max-width: 768px;
+  min-width: 500px;
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+}
+
+.signup_content{
+  /* width: 100%; */
+  width: 500px;
+  /* text-align: center; */
+  /* vertical-align: center; */
+}
+
+
+.signup_row{
+  margin-top: 20px;
+  display: block;
+}
+
+.signup_title{
+  margin: 19px 0 8px;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: left;
+}
+
+
+.signup_input{
+  background: #fff;
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 48px;
+  border: solid 1px #dadada;
+  padding: 8px 12px 8px 12px;
+  /* box-sizing: border-box; */
+  vertical-align: top;
+}
+
+.signup_input_id{
+  position: relative;
+  margin-top: 10px;
+  padding: 0 125px 0 0;
+}
+
+
+.signup_box_row{
+  display: table-cell;
+  table-layout: fixed;
+  width: 100%;
+  vertical-align: middle;
+}
+
+.signup_box_row+.signup_box_row{
+    padding-left: 10px;
+}
+
+.box_right_space{
+  padding-right: 14px;
+}
+
+.btn_verify {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 115px;
+  height: 48px;
+  padding: 14px 0 14px;
+  text-align: center;
+  -webkit-box-sizing: border-box;
+  border: none;
+  box-sizing: border-box;
+  text-decoration: none;
+  display: block;
+  font-size: 15px;
+  font-weight: 500;
+  cursor: pointer;
+  vertical-align: center;
+}
+
+.btn_type {
+  display: block;
+  width: 100%;
+  padding: 17px 0 17px;
+  font-size: 20px;
+  font-weight: 500;
+  text-align: center;
+  cursor: pointer;
+  -webkit-box-sizing: border-box;
+  border: none;
+  box-sizing: border-box;
+  -webkit-transition-duration: 0.2s;
+  transition-duration: 0.2s;
+}
+
+.btn_primary {
+  color: #fff;
+  background-color: var(--btn-color);
+}
+
+.btn_primary:hover{
+  background-color: var(--btn-color2);
+    /* text-shadow: -0.5px 0 var(--darker-grey), 0 0.5px var(--darker-grey), 0.5px 0 var(--darker-grey), 0 -0.5px var(--darker-grey); */
+}
+
+.signup_btn_row {
+    margin: 30px 0 9px;
+}
+
+.error_next_box {
+    display: block;
+    margin: 9px 0 -2px;
+    font-size: 12px;
+    line-height: 14px;
+    color: red;
+}

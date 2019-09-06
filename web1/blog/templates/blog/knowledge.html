@@ -1,0 +1,413 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    {% if messg %}
+  <script>
+      alert('{{ messg }}');
+  </script>
+  {% endif %}
+<!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <!-- main CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/knowledge.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/signup.css' %}">
+
+
+    {% if title %}
+    <title>{{ title }}</title>
+    {% else %}
+    <title>Tutor trade</title>
+    {% endif %}
+  </head>
+
+  <body>
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-top">
+        <div class="container">
+          <a class="navbar-brand mr-4" href="/">Welcome to Tutor Trade</a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+              <a class="nav-item nav-link" href="{% url 'blog-knowledge' %}" style="color:white;">Knowledge Board</a>
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" href="{% url 'blog-logout' %}">Logout</a>
+                <a class="nav-item nav-link" href="{% url 'blog-myProfile' %}">My Profile</a>
+                <a class="nav-item nav-link" href="{% url 'blog-createpost' %}">Make A Post</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <!-- bottom header -->
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-bottom">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto" style="color: white;">
+              Bringing free knowledge to all UCSC students.
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+              <a class="nav-item nav-link" href="{% url 'blog-contact' %}">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main role="main" class="container">
+      <div class="row" style="margin-bottom: 10px;">
+        <div class="col-md-8">
+          <div class="title_container">
+            <h1> Knowledge Board </h1>
+          </div>
+        </div>
+
+      <form action="/postknowledge/" method="post"> <!-- HERE IS YOUR ACTION FORM! -->
+        {% csrf_token %}
+            
+        <div class="col-md-4">
+          <div class="title_container">
+          </div>
+        </div>
+      </div>
+      <div class="row" style="margin-top: 10px;">
+        <div class="col-md-12">
+          <div class="content-section">
+            <div class="row">
+              <div class="col-md-2" style="text-align: center;">
+                <h4>Search Tutor</h4>
+                Type your tutoring needs as well as abilities into the search fields,
+                then click "search" to populate the Knowledge Board with your matches!
+              </div>
+              <div class="col-md-4">
+                <div class="search_row">
+                  <div class="search_title">I need tutoring in:</div>
+                  <span class="search_input">
+                    <input type="search1" name ="search1" id="search1_input" maxlength="40" style="border: none; width: 100%;" />
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="search_row">
+                  <div class="search_title">I am offering tutoring in:</div>
+                  <span class="search_input">
+                    <input type="search2" name ="search2" id="search2_input" maxlength="40" style="border: none; width: 100%;" />
+                  </span>
+                </div>
+              </div>
+              <div class="col-md-2">
+                <div class="search_row">
+                  <input type="submit" value="Search" style="color:black; position: relative; margin: auto; margin-top: 30px">
+                  <!--<a class="btn_primary btn_search" name="knowledgeSearch" id="btnSearch" style="color:white; position: relative; margin: auto; margin-top: 22px;">
+                    Search
+                  </a>-->
+                </div>
+              </div>
+
+            </div>
+          </div>
+      </div>
+
+      </div>
+    </form>
+
+
+      <div class="row" style="margin-top: 10px; margin-bottom: 50px">
+
+
+        <div class="col-md-12">
+          <div class="content-section">
+            <h3>Knowledge Board</h3>
+            Welcome, {{e}}!
+            {% if message2 %}
+              {{ message2 }}
+            {% endif %}  
+            <div class="row" id="post-container">
+              <br>
+            {% if empty %}
+              {{ empty }}
+            {% endif %} 
+
+            {% if List %}
+
+              {% for x in List %}
+   
+              <div class="col-md-12">
+                  <div class="content-section">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <form action="/viewprofile/" method="post">
+                          {% csrf_token %}
+                        <input type="submit" value="View Profile"></input> <br>
+                        </form> 
+                          
+                        {% for z in List2 %}
+                          {{ z }}       <br>
+                        {% endfor %}
+
+                        
+                      </div> 
+                      <div class="col-md-4">
+                        
+                      </div>
+                      <div class="col-md-4">
+                        <br>
+                        {% for y in x %}
+
+                          {{ y }} <br>
+                          
+
+                        {% endfor %}
+                      </div>
+                    </div>  
+                  </div>
+                </div>
+            
+
+              <br>
+            
+          
+               
+               
+                 
+
+                         
+
+                
+
+
+                
+
+              {% endfor %}    
+
+            {% endif %} 
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+  <!--</form>-->
+    
+    <header class="site-header">
+      <nav class="navbar navbar-expand-md navbar-dark bg-steel fixed-bottom">
+        <div class="container">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarToggle">
+            <div class="navbar-nav mr-auto">
+            </div>
+            <!-- Navbar Right Side -->
+            <div class="navbar-nav">
+               <a class="nav-item nav-link" href="{% url 'blog-about' %}">About</a>
+              <a class="nav-item nav-link" href="{% url 'blog-contact' %}">Contact Us</a>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+
+    <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.0/firebase-auth.js"></script>
+
+    <!--<script>
+    // Your web app's Firebase configuration
+
+    var firebaseConfig = {
+        apiKey: "AIzaSyBHHg2e5gRop8tcO2RReu8paiEXJbGomVw",
+        authDomain: "verve-slug-tutor.firebaseapp.com",
+        databaseURL: "https://verve-slug-tutor.firebaseio.com",
+        projectId: "verve-slug-tutor",
+        storageBucket: "verve-slug-tutor.appspot.com",
+        messagingSenderId: "1013220996189",
+        appId: "1:1013220996189:web:615c1dfe72a6e660"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+
+    var courseNameList = [];
+
+    firebase.database().ref('courseList/').once('value', function(snapshot){
+      var courseList = snapshot.val();
+      console.log("courseList: ", courseList);
+      var category = Object.keys(courseList);
+      console.log("category: ", category);
+      // var courseNameList =[];
+      for (var i=0; i<category.length; i++) {
+        var curKey = category[i]; /* department name */
+        var subcourseList = Object.keys(courseList[curKey]);
+        // console.log(subcourseList);
+        for (var j=0; j<subcourseList.length; j++) {
+          // var subcurKey = subcourseList[j]; /* department name */
+          var current = courseList[curKey][subcourseList[j]];
+          courseNameList.push(current.cName);
+        }
+      }
+      console.log(courseNameList);
+
+
+    });
+
+    /* Auto Complete */
+    $( function() {
+      // var names = [ "Jörn Zaefferer", "Scott González", "John Resig" ];
+      var accentMap = { "á": "a", "ö": "o" };
+      var normalize = function( term ) {
+        var ret = "";
+        for ( var i = 0; i < term.length; i++ ) {
+          ret += accentMap[ term.charAt(i) ] || term.charAt(i);
+        }
+        return ret;
+      };
+
+      $( "#search1_input" ).autocomplete({
+        source: function( request, response ) {
+          var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
+          response( $.grep( courseNameList, function( value ) {
+            value = value.label || value.value || value;
+            return matcher.test( value ) || matcher.test( normalize( value ) );
+          }) );
+        },
+        select: function( event, ui ) {
+          $( "#search1_input" ).val(ui.item.value);
+          // // console.log("input text : "+ document.getElementById("pr2__answer").value);
+          // $( "#pr2__submit" ).click();
+          return false;
+        },
+        close: function(event, ui) {
+          console.log("close");
+        }
+      });
+    });
+
+    $( function() {
+      // var names = [ "Jörn Zaefferer", "Scott González", "John Resig" ];
+      var accentMap = { "á": "a", "ö": "o" };
+      var normalize = function( term ) {
+        var ret = "";
+        for ( var i = 0; i < term.length; i++ ) {
+          ret += accentMap[ term.charAt(i) ] || term.charAt(i);
+        }
+        return ret;
+      };
+
+      $( "#search2_input" ).autocomplete({
+        source: function( request, response ) {
+          var matcher = new RegExp( $.ui.autocomplete.escapeRegex( request.term ), "i" );
+          response( $.grep( courseNameList, function( value ) {
+            value = value.label || value.value || value;
+            return matcher.test( value ) || matcher.test( normalize( value ) );
+          }) );
+        },
+        select: function( event, ui ) {
+          $( "#search2_input" ).val(ui.item.value);
+          // // console.log("input text : "+ document.getElementById("pr2__answer").value);
+          // $( "#pr2__submit" ).click();
+          return false;
+        },
+        close: function(event, ui) {
+          console.log("close");
+        }
+      });
+    });
+
+    var filtered = new Array();
+
+    firebase.database().ref('post/').once('value', function(snapshot) {
+      fpostList = snapshot.val();
+      // console.log("filtered", fpostList);
+      filtered = fpostList;
+      console.log("filtered", filtered);
+    });
+
+    function filtering(){
+      var fkeyList = Object.keys(fpostList);
+      var fpostLength = fkeyList.length;
+      var new_filtered = {};
+
+      for(var i=0; i<fkeyList.length; i++) {
+         if (fpostList[fkeyList[i]].look === $( "#search1_input" ).val() && fpostList[fkeyList[i]].offer === $( "#search2_input" ).val()){
+           console.log("catch", fkeyList[i], fpostList[fkeyList[i]]);
+           new_filtered[fkeyList[i]] = fpostList[fkeyList[i]];
+         }
+         else if ($( "#search1_input" ).val() === "" && fpostList[fkeyList[i]].offer === $( "#search2_input" ).val()) {
+           console.log("catch", fkeyList[i], fpostList[fkeyList[i]]);
+           new_filtered[fkeyList[i]] = fpostList[fkeyList[i]];
+         }
+         else if($( "#search2_input" ).val() === "" && fpostList[fkeyList[i]].look === $( "#search1_input" ).val()){
+           console.log("catch", fkeyList[i], fpostList[fkeyList[i]]);
+           new_filtered[fkeyList[i]] = fpostList[fkeyList[i]];
+         }
+      }
+      filtered = new_filtered;
+      console.log("modified filtered", filtered);
+    }
+
+    firebase.database().ref('post/').once('value', function(snapshot) {
+      var postList = snapshot.val();
+      console.log(postList);
+      var keyList = Object.keys(postList);
+      var postLength = keyList.length;
+      console.log(keyList, postLength);
+      var postcontainer = document.getElementById("post-container");
+      console.log(postcontainer);
+      console.log(postcontainer.innerHTML);
+      var postAllHTML = "";
+      for(var i=0; i<keyList.length; i++) {
+        var post = "";
+        var curKey = keyList[i];
+        // console.log(postList[curKey].author);
+        var author = postList[curKey].author;
+        var content = postList[curKey].content;
+        var date_posted = postList[curKey].date_posted;
+        var email = postList[curKey].email;
+        var status = postList[curKey].status;
+        var title = postList[curKey].title;
+
+        post = "Title: " + title + "<br/>Author: " + author + "<br/>Content: " + content + "<br/>Date_posted: " + date_posted + "<br/>Email: "+ email + "<br/>Status: "+ status;
+        console.log(post);
+        postHTML = '<div class="col-md-6"><div class="post-box">'+post+'</div></div>'
+        postAllHTML += postHTML;
+      }
+      postcontainer.innerHTML = postAllHTML;
+      // console.log(post.length());
+    });
+
+    </script>
+  </body>
+
+</body>
+
+</html>
